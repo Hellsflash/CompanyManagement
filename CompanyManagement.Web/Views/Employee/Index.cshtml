@@ -1,0 +1,52 @@
+﻿@model List<CompanyManagement.Common.ViewModels.EmployeeViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+@if (Model.Count != 0)
+{
+    <div class="row">
+        <h1>
+            @Model.First().CompanyName Employees<button type="button" class="btn btn-success" style="float: right; width: 150px; margin-right: -10px;" onclick="location.href = '@Url.Action("Add",new{id=Url.RequestContext.RouteData.Values["id"]})'">Add Employee</button>
+        </h1>
+    </div>
+    <br />
+    <div class="container">
+        <div class="row">
+            <table class="table table-bordered  table-striped" style="width: 100%">
+                <thead>
+                    <tr style="background: royalblue">
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Start Date</th>
+                        <th>Experience Level</th>
+                        <th>Salary</th>
+                        <th>Vacation Days</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+
+                    @Html.HiddenFor(i => item.Id)
+                    @Html.HiddenFor(i => item.CompanyId)
+                    <tr>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.StartDate</td>
+                        <td>@item.ExperienceLevel</td>
+                        <td>@item.Salary</td>
+                        <td>@item.VacationDays</td>
+                        <td><button type="button" class="btn" onclick="location.href = '@Url.Action("Edit", "Employee", new {id = item.Id})'">Edit</button></td>
+                        <td><button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Delete","Employee",new{id =item.Id})'">Delete</button></td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <h1>No Employees in this Company<button type="button" class="btn btn-success" style="float: right; width: 150px; margin-right: -10px;" onclick="location.href='@Url.Action("Add",new{id=Url.RequestContext.RouteData.Values["id"]})'">Add Employee</button></h1>
+}

@@ -1,0 +1,14 @@
+﻿@model CompanyManagement.Common.ViewModels.EmployeeDeleteViewModel
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Are you sure you want to Delete @Model.FirstName @Model.LastName form this compny? </h2>
+
+@using (Html.BeginForm("Delete", "Employee", FormMethod.Post))
+{
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.CompanyId)
+<input type="submit" name="answer" formaction="@Url.Action("Delete")" value="Yes" class="btn btn-success" />
+<input type="submit" name="answer" formaction="@Url.Action("Delete")" value="No" class="btn btn-danger" />
+}

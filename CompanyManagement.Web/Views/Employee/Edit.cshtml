@@ -1,0 +1,52 @@
+﻿@using CompanyManagement.Common.Enums
+@model CompanyManagement.Common.ViewModels.EmployeeEditViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form_main">
+                <h4 class="heading"><strong>Edit </strong> Employee <span></span></h4>
+
+                @using (Html.BeginForm("Edit", "Employee", FormMethod.Post, new { id = @Url.RequestContext.RouteData.Values["id"] }))
+                {
+                    @Html.HiddenFor(modle=>Model.CompanyId);
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName, "First Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName, "Last Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StartDate, "Start Date", htmlAttributes: new { @class = "control-label col-md-4" })
+                        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ExperienceLevel, "Experience Level", htmlAttributes: new { @class = "control-label col-md-6" })
+                        @Html.DropDownListFor(model => model.ExperienceLevel, new SelectList(Enum.GetValues(typeof(ExperianceEnum))), new { htmlAttributes = new { @class = "dropdown" } })
+                        @Html.ValidationMessageFor(model => model.ExperienceLevel, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Salary, "Salary", htmlAttributes: new { @class = "control-label col-md-4" })
+                        @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.VacationDays, "Vacation Days", htmlAttributes: new { @class = "control-label col-md-5" })
+                        @Html.EditorFor(model => model.VacationDays, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                    <input type="submit" class=" btn btn-success" style="width: 140px" value="Edit" />
+                    <input type="button" class="btn btn-danger" value="Cancel" style="width: 140px" onclick="location.href='@Url.Action("Index","Company")'" />
+                }
+            </div>
+        </div>
+    </div>
+</div>

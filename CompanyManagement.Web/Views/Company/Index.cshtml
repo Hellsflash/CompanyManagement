@@ -1,0 +1,35 @@
+﻿@model List<CompanyManagement.Common.ViewModels.CompanyViewModel>
+@{
+    ViewBag.Title = "List Of Companies";
+}
+<div class="row">
+    <h1>All Companies<button type="button" class="btn btn-success" style="float: right; width: 150px; margin-right: -10px;" onclick="location.href='@Url.Action("Create")'">Create Company</button></h1>
+</div>
+<br />
+<div class="container">
+    <div class="row">
+        <table class="table table-bordered  table-striped" style="width: 100%">
+            <thead>
+                <tr style="background: royalblue">
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Info</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Address</td>
+                <td>@item.Info</td>
+                <td><button type="button" class="btn" onclick="location.href='@Url.Action("Edit","Company",new {id = item.Id})'">Edit</button></td>
+                <td><button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Delete","Company",new{id =item.Id})'">Delete</button></td>
+                <td><button class="btn btn-default" onclick="location.href='@Url.Action("Index","Employee",new {id=item.Id})'">Employees</button></td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>
